@@ -1,6 +1,8 @@
 package solvd.laba.connectionclasses;
 
-public class Connection {
+import java.util.concurrent.Callable;
+
+public class Connection implements Callable<String> {
 
     private final int id;
 
@@ -14,6 +16,15 @@ public class Connection {
         System.out.println(this + " has been released by thread "
                 + Thread.currentThread().getName());
     }
+
+
+    @Override
+    public String call() throws InterruptedException {
+        System.out.println("Accessed callable's method");
+        use();  // The callable task calls the use method
+        return this + " completed by " + Thread.currentThread().getName();
+    }
+
 
     @Override
     public String toString(){
